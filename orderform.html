@@ -1,0 +1,87 @@
+<section id="order-section" style="max-width: 600px; margin: 50px auto; background: #ffffff; padding: 30px; border-radius: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); font-family: Arial, sans-serif;">
+  <h2 style="text-align: center; color: #333;">🥿 Mwalimu Footwear Order Form</h2>
+  <p style="text-align: center; color: #666;">Review your cart and complete the details below to place your order.</p>
+  
+  <form id="orderForm" action="https://formspree.io/f/mdkpqepq" method="POST">
+    <!-- Cart Items Will Auto-Appear Here -->
+    <div id="cart-items"></div>
+
+    <hr style="margin: 25px 0;">
+
+    <label for="phone" style="display:block; margin-top:15px; color:#444;">Phone Number</label>
+    <input type="tel" id="phone" name="phone" placeholder="e.g. 0712345678" required style="width:100%; padding:10px; border:1px solid #ccc; border-radius:8px;">
+
+    <label for="location" style="display:block; margin-top:15px; color:#444;">Delivery Location</label>
+    <input type="text" id="location" name="location" placeholder="e.g. Mandera Town" required style="width:100%; padding:10px; border:1px solid #ccc; border-radius:8px;">
+
+    <!-- New Payment Type -->
+    <label for="payment" style="display:block; margin-top:15px; color:#444;">Payment Type</label>
+    <select id="payment" name="payment_type" required style="width:100%; padding:10px; border:1px solid #ccc; border-radius:8px; background:#fff;">
+      <option value="" disabled selected>Select Payment Type</option>
+      <option value="Payment on Delivery">Payment on Delivery</option>
+      <option value="Payment Before Delivery">Payment Before Delivery</option>
+    </select>
+
+    <label for="message" style="display:block; margin-top:15px; color:#444;">Additional Notes</label>
+    <textarea id="message" name="message" placeholder="Any special requests?" rows="3" style="width:100%; padding:10px; border:1px solid #ccc; border-radius:8px;"></textarea>
+
+    <button type="submit" style="margin-top:20px; width:100%; background:#0b8457; color:#fff; padding:12px; border:none; border-radius:8px; font-size:16px; cursor:pointer;">Place Order</button>
+  </form>
+
+  <p id="form-message" style="text-align:center; font-weight:bold; margin-top:15px;"></p>
+</section>
+
+<script>
+  // Get references
+  const cartContainer = document.getElementById('cart-items');
+  const form = document.getElementById('orderForm');
+  const message = document.getElementById('form-message');
+
+  // Load cart items from localStorage
+  const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+  if (cart.length === 0) {
+    cartContainer.innerHTML = "<p style='color:red; text-align:center;'>🛒 Your cart is empty.</p>";
+  } else {
+    cart.forEach((item, index) => {
+      const div = document.createElement('div');
+      div.style.marginBottom = '15px';
+      div.style.padding = '10px';
+      div.style.border = '1px solid #ddd';
+      div.style.borderRadius = '10px';
+      div.style.background = '#f9f9f9';
+      div.innerHTML = `
+        <strong>${item.name}</strong> (x${item.quantity}) - Ksh ${item.price * item.quantity}<br>
+        <label style="color:#444;">Shoe Size:</label>
+        <input type="text" name="size_${index}" placeholder="e.g. 42" required style="margin-top:5px; padding:8px; width:100%; border:1px solid #ccc; border-radius:6px;">
+        <input type="hidden" name="product_${index}" value="${item.name}">
+        <input type="hidden" name="quantity_${index}" value="${item.quantity}">
+      `;
+      cartContainer.appendChild(div);
+    });
+  }
+
+  // Handle form submission
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    message.style.color = '#0b8457';
+    message.textContent = "Submitting your order...";
+
+    const response = await fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    });
+
+    if (response.ok) {
+      message.style.color = '#0b8457';
+      message.textContent = "✅ Thank you! Your order has been received. We'll contact you soon.";
+      form.reset();
+      localStorage.removeItem('cart'); // Clear cart after successful order
+    } else {
+      message.style.color = 'red';
+      message.textContent = "❌ Something went wrong. Please try again later.";
+    }
+  });
+</script>
+

@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mwalimu Footwear - Products</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      margin: 0;
+      padding: 0;
+    }
+    
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f5f5f5;
+  }
+
+
+
+
+
+
+.cart-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  text-decoration: none;
+  color: #333;
+  transition: color 0.3s ease;
+}
+
+.cart-link:hover {
+  color: #007bff;
+}
+
+
+
+
+
+
+
+
+
+
+  .product-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+    padding: 10px;
+    background: #f5f5f5;
+  }
+
+  .product-card {
+    background: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 10px;
+    text-align: center;
+    box-shadow: none;
+  }
+
+  .product-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: contain;
+    border: none;
+    display: block;
+    background: #fff;
+  }
+
+  .product-card h3 {
+    font-size: 14px;
+    margin: 8px 0 4px;
+    color: white;
+    font-weight: normal;
+  }
+
+  .product-card p {
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    margin: 0;
+  }
+
+  .discount {
+    background: #ffefeb;
+    color: #ff6600;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 12px;
+    display: inline-block;
+    margin-bottom: 5px;
+  }
+  
+
+    /* White block like Jumia */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+      background: #ffffff;
+      padding: 10px;
+      gap: 1px;
+    }
+
+    .product-card {
+      background: #ffffff;
+      text-align: center;
+      padding: 10px;
+      border: 1px  #f5f5f5; /* thin separation line like Jumia */
+      transition: transform 0.2s ease;
+    }
+
+    .product-card:hover {
+      transform: scale(1.02);
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 170px;
+      object-fit: contain;
+      border: none; /* invisible borders */
+      background: #ffffff;
+    }
+
+    .product-card h3 {
+      font-size: 14px;
+      color: #333;
+      margin: 8px 0 4px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .product-card p {
+      color: #111;
+      font-weight: bold;
+      font-size: 14px;
+      margin: 0;
+    }
+
+    .add-to-cart {
+      background: #ff9900;
+      color: white;
+      border: none;
+      padding: 6px 10px;
+      border-radius: 4px;
+      font-size: 13px;
+      cursor: pointer;
+      margin-top: 5px;
+    }
+
+    .add-to-cart:hover {
+      background: #e68a00;
+    }
+
+    /* Make grid more compact on smaller screens */
+    @media (max-width: 600px) {
+      .product-card img {
+        height: 140px;
+      }
+      .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+   /* Top Bar */
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #ffffff;
+  padding: 8px 15px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.icon-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  object-fit: cover;
+  transition: transform 0.2s ease;
+}
+
+.icon:hover {
+  transform: scale(1.1);
+}
+
+/* Search Bar */
+.search-bar {
+  flex: 1;
+  margin: 0 10px;
+  padding: 7px 12px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  font-size: 14px;
+  outline: none;
+  background: #f8f8f8;
+}
+
+.search-bar:focus {
+  border-color: #ff9900;
+  background: #fff;
+}
+/* SEARCH BAR STYLING */
+.search-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 25px 0;
+}
+
+.search-container input {
+  width: 80%;
+  max-width: 420px;
+  padding: 12px 18px;
+  border-radius: 30px;
+  border: 2px solid transparent;
+  background: #f0f0f0;
+  font-size: 16px;
+  outline: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.search-container input:focus {
+  background: #fff;
+  border-color: #ff9900;
+  box-shadow: 0 0 10px rgba(255,153,0,0.4);
+  transform: scale(1.02);
+}
+.discount-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #ff6600;
+  color: white;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 4px;
+  z-index: 2;
+}
+
+.product-card {
+  position: relative;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px white;
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+}
+/* Stylish Top Bar */
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(90deg, #0b8457, #13a47e);
+  padding: 8px 15px;
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.icon-link {
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  transition: transform 0.2s;
+}
+
+.icon:hover {
+  transform: scale(1.1);
+}
+
+/* Search Bar Styling */
+.search-container {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  margin: 0 15px;
+}
+
+#searchBar {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px 15px;
+  border-radius: 25px;
+  border: none;
+  outline: none;
+  font-size: 15px;
+  box-shadow: 0 0 6px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
+
+#searchBar:focus {
+  box-shadow: 0 0 10px rgba(11,132,87,0.5);
+}
+
+/* Decorative Banner */
+.banner-strip {
+  background: linear-gradient(to right, #f7fdf9, #e6fff3);
+  text-align: center;
+  padding: 10px 0;
+  color: #0b8457;
+  border-bottom: 2px solid #0b8457;
+  margin-bottom: 15px;
+}
+
+.banner-strip h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.banner-strip p {
+  margin: 5px 0 0;
+  font-size: 13px;
+  color: #555;
+}
+
+
+
+
+
+
+  </style>
+</head>
+<body>
+
+<!-- Decorative Top Section -->
+
+
+
+
+
+ <!-- Stylish Top Bar -->
+<div class="top-bar">
+  <a href="myshop.html" class="icon-link">
+    <img src="data/images/home.jpg" alt="Home" class="icon">
+  </a>
+
+  <div class="search-container">
+    <input type="text" id="searchBar" placeholder="🔍 Search for shoes, brands..." />
+  </div>
+
+  <a href="cart.html" class="icon-link">
+    <img src="data/images/trolley.png" alt="Cart" class="icon">
+  </a>
+</div>
+
+<!-- Decorative Banner Under Top Bar -->
+<div class="banner-strip">
+  <h2>✨ Mwalimu Footwear Collection 👟</h2>
+  <p>Style • Comfort • Quality</p>
+</div>
+
+
+
+  
+
+ 
+
+
+
+
+
+  <div class="product-grid" id="product-grid">
+
+  <div class="product-card" data-id="1" data-name="Naked Wolfe Green White" data-price="3100" data-image="data/images/mmmm.jpg">
+    <div class="discount-badge">-32%</div>
+    <img src="data/images/mmmm.jpg" alt="Naked Wolfe Green White">
+    <h3>Naked Wolfe Green White</h3>
+    <p>Ksh 3100</p>
+    <button class="add-to-cart">Add to Cart</button>
+  </div>
+   
+  <div class="product-card" data-id="2" data-name="Airmax 90 Grey" data-price="2500" data-image="data/images/black.jpg">
+    <div class="discount-badge">-18%</div>
+    <img src="data/images/caller.jpg" alt="Airmax 90 Grey">
+    <h3>Airmax 90 Grey</h3>
+    <p>Ksh 2500</p>
+    <button class="add-to-cart">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="3" data-name="New Airmax Black And White" data-price="2400" data-image="data/images/blackairmax.jpg">
+    <div class="discount-badge">-29%</div>
+    <img src="data/images/blackairmax.jpg" alt="New Airmax Black And White">
+    <h3>New Airmax Black And White</h3>
+    <p>Ksh 2400</p>
+    <button class="add-to-cart">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="4" data-name="New Balance Black" data-price="2600" data-image="data/images/balancew.jpg">
+    <div class="discount-badge">-41%</div>
+    <img src="data/images/balancew.jpg" alt="New Balance Black">
+    <h3>New Balance Black</h3>
+    <p>Ksh 2600</p>
+    <button class="add-to-cart">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="5" data-name="BapeStar Black and white" data-price="1900" data-image="data/images/nor.jpg">
+    <div class="discount-badge">-16%</div>
+    <img src="data/images/nora.jpg" alt="BapeStar Black and white">
+    <h3>BapeStar Black and white</h3>
+    <p>Ksh 1900</p>
+    <button class="add-to-cart">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="6" data-name="Black Jordan" data-price="2400" data-image="data/images/black.jpg">
+    <div class="discount-badge">-25%</div>
+    <img src="data/images/black.jpg" alt="Black Jordan">
+    <h3>Black Jordan</h3>
+    <p>Ksh 2400</p>
+    <button class="add-to-cart">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="7" data-name="Black Jordan" data-price="2350" data-image="data/images/kali.jpg">
+    <div class="discount-badge">-36%</div>
+    <img src="data/images/kali.jpg" alt="Black Jordan">
+    <h3>Black Jordan</h3>
+    <p>Ksh 2350</p>
+    <button class="add-to-cart">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="8" data-name="Grey Airmax 90" data-price="2400" data-image="data/images/mine.jpg">
+    <div class="discount-badge">-23%</div>
+    <img src="data/images/mine.jpg" alt="Grey Airmax 90">
+    <h3>Grey Airmax 90</h3>
+    <p>Ksh 2400</p>
+    <button class="add-to-cart">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="9" data-name="Mangshon Aididas" data-price="3200" data-image="data/images/man.jpg">
+    <div class="discount-badge">-40%</div>
+    <img src="data/images/man.jpg" alt="Mangshon Aididas">
+    <h3>Mangshon Aididas</h3>
+    <p>Ksh 3200</p>
+    <button class="add-to-cart">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="10" data-name="Red and Black Jordan 4" data-price="2600" data-image="data/images/j4red.jpg">
+    <div class="discount-badge">-21%</div>
+    <img src="data/images/j4red.jpg" alt="Red and Black Jordan 4">
+    <h3>Red and Black Jordan 4</h3>
+    <p>Ksh 2600</p>
+    <button class="add-to-cart">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="11" data-name="Blue and Black Jordan 4" data-price="2600" data-image="data/images/j4.jpg">
+    <div class="discount-badge">-27%</div>
+    <img src="data/images/j4.jpg" alt="Blue and Black Jordan 4">
+    <h3>Blue and Black Jordan 4</h3>
+    <p>Ksh 2600</p>
+    <button class="add-to-cart">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="12" data-name="Blue and White Naked Wolfe" data-price="3100" data-image="data/images/wolf.jpg">
+    <div class="discount-badge">-19%</div>
+    <img src="data/images/wolf.jpg" alt="Blue and White Naked Wolfe">
+    <h3>Blue and White Naked Wolfe</h3>
+    <p>Ksh 3100</p>
+    <button class="add-to-cart">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="13" data-name="Black and Orange Naked Wolfe" data-price="3100" data-image="data/images/wolfe.jpg">
+    <div class="discount-badge">-30%</div>
+    <img src="data/images/wolfe.jpg" alt="Black and Orange Naked Wolfe">
+    <h3>Black and Orange Naked Wolfe</h3>
+    <p>Ksh 3100</p>
+    <button class="add-to-cart">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="14" data-name="Black Strips White Samba" data-price="2800" data-image="data/images/whitesamba.jpg">
+    <div class="discount-badge">-38%</div>
+    <img src="data/images/whitesamba.jpg" alt="Black Strips White Samba">
+    <h3>Black Strips White Samba</h3>
+    <p>Ksh 2800</p>
+    <button class="add-to-cart">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="15" data-name="Smart Airmax 90" data-price="2400" data-image="data/images/kali.jpg">
+    <div class="discount-badge">-14%</div>
+    <img src="data/images/kali.jpg" alt="Smart Airmax 90">
+    <h3>Smart Airmax 90</h3>
+    <p>Ksh 2400</p>
+    <button class="add-to-cart">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="16" data-name="White Jordan" data-price="2500" data-image="data/images/whitey.jpg">
+    <div class="discount-badge">-41%</div>
+    <img src="data/images/whitey.jpg" alt="White Jordan">
+    <h3>White Jordan</h3>
+    <p>Ksh 2500</p>
+    <button class="add-to-cart">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="17" data-name="White Strips Black Samba" data-price="2000" data-image="data/images/blacksamba.jpg">
+    <div class="discount-badge">-24%</div>
+    <img src="data/images/blacksamba.jpg" alt="White Strips Black Samba">
+    <h3>White Strips Black Samba</h3>
+    <p>Ksh 2000</p>
+    <button class="add-to-cart">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="18" data-name="New Balance White" data-price="2600" data-image="data/images/balance.jpg">
+    <div class="discount-badge">-34%</div>
+    <img src="data/images/balance.jpg" alt="New Balance White">
+    <h3>New Balance White</h3>
+    <p>Ksh 2600</p>
+    <button class="add-to-cart">Add to Cart</button>
+  </div>
+
+  <div class="product-card" data-id="19" data-name="Nike SB Black and White" data-price="2350" data-image="data/images/nikesb.jpg">
+    <div class="discount-badge">-20%</div>
+    <img src="data/images/nikesb.jpg" alt="Nike SB Black and White">
+    <h3>Nike SB Black and White</h3>
+    <p>Ksh 2350</p>
+    <button class="add-to-cart">Add to Cart</button>
+  </div>
+
+ 
+</div>
+
+</div>
+
+
+
+<script>
+// Simple Add to Cart System (stores data in localStorage)
+document.querySelectorAll('.add-to-cart').forEach(button => {
+  button.addEventListener('click', function() {
+    const productCard = this.closest('.product-card');
+    const id = productCard.dataset.id;
+    const name = productCard.dataset.name;
+    const price = productCard.dataset.price;
+    const image = productCard.dataset.image;
+
+    // Retrieve existing cart or create new
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    // Check if product already exists
+    const existingItem = cart.find(item => item.id === id);
+    if (existingItem) {
+      existingItem.quantity += 1; // increase quantity
+    } else {
+      cart.push({ id, name, price, image, quantity: 1 });
+    }
+
+    // Save back to localStorage
+    localStorage.setItem('cart', JSON.stringify(cart));
+
+    // Small visual feedback
+    this.textContent = '✔ Added';
+    this.style.background = '#28a745';
+    setTimeout(() => {
+      this.textContent = 'Add to Cart';
+      this.style.background = '#ff9900';
+    }, 1000);
+  });
+});
+
+
+
+// SEARCH FILTER FUNCTION
+document.getElementById('searchBar').addEventListener('keyup', function() {
+  const searchValue = this.value.toLowerCase();
+  const products = document.querySelectorAll('.product-card');
+
+  products.forEach(product => {
+    const name = product.dataset.name.toLowerCase();
+    const match = name.includes(searchValue);
+    product.style.display = match ? 'block' : 'none';
+  });
+});
+
+</script>
+
+</body>
+</html>
